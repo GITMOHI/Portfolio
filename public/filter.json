@@ -1,0 +1,6 @@
+[
+    { "label": "all", "isChecked": true },
+    { "label": "Frontend", "isChecked": false },
+    { "label": "Backend(Node.js)", "isChecked": false },
+    { "label": "Backend(Django)", "isChecked": false }
+]

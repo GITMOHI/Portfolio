@@ -1,0 +1,59 @@
+[
+      {
+        "name": "HTML & CSS",
+        "description": "Markup language for creating web pages and style sheet language for describing the presentation of a document written in HTML.",
+        "image": "https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png"
+      },
+      {
+        "name": "JavaScript",
+        "description": "High-level programming language for creating dynamic and interactive content on web pages.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/512px-Unofficial_JavaScript_logo_2.svg.png"
+      },
+      {
+        "name": "React",
+        "description": "JavaScript library for building user interfaces.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png"
+      },
+      {
+        "name": "Python",
+        "description": "High-level programming language known for its simplicity and readability, commonly used for web development, data science, and more.",
+        "image": "https://www.python.org/static/community_logos/python-logo.png"
+      },
+      {
+        "name": "Django",
+        "description": "High-level Python web framework that encourages rapid development and clean, pragmatic design.",
+        "image": "https://www.djangoproject.com/s/img/logos/django-logo-negative.png"
+      },
+      {
+        "name": "Node.js",
+        "description": "JavaScript runtime environment for building server-side and networking applications.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/512px-Node.js_logo.svg.png"
+      },
+      {
+        "name": "Express.js",
+        "description": "Web application framework for Node.js.",
+        "image": "https://iotbyhvm.ooo/wp-content/uploads/2019/01/expressjs-800x445.png"
+      },
+      {
+        "name": "MongoDB",
+        "description": "NoSQL database program.",
+        "image": "https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png"
+      },
+      {
+        "name": "MySQL",
+        "description": "Open-source relational database management system.",
+        "image": "https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/1200px-MySQL.svg.png"
+      },
+      {
+        "name": "Version Control (Git)",
+        "description": "Distributed version control system for tracking changes in source code.",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/512px-Git-logo.svg.png"
+      },
+      {
+        "name": "RESTful APIs",
+        "description": "Architectural style for designing networked applications.",
+        "image": "https://www.soapui.org/soapui/media/documents/soapui_rest_icon-1.png"
+      }
+   
+]
+  

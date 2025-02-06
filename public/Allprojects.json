@@ -1,0 +1,87 @@
+[
+    {
+        "id": 1,
+        "image_link": "https://i.ibb.co/G73t1Zp/7217.jpg",
+        "project_heading": "Modern Architecture1 ",
+        "description": "This project showcases a modern architectural marvel featuring sleek lines, geometric shapes, and expansive glass windows. The design emphasizes functionality and aesthetics, blending seamlessly with its surroundings. The use of minimalist elements creates an elegant and timeless structure.",
+        "genre": "Web App"
+    },
+    {
+        "id": 2,
+        "image_link": "https://i.ibb.co/K7vzr6M/4882477.jpg",
+        "project_heading": "Urban Oasis2",
+        "description": "This project focuses on creating an urban oasis within a bustling cityscape. The design incorporates lush greenery, tranquil water features, and open spaces, providing a serene retreat amidst the urban hustle. It aims to foster a connection with nature while offering a haven for relaxation and rejuvenation.",
+        "genre": "Frontend"
+    },
+    {
+        "id": 3,
+        "image_link": "https://i.ibb.co/K7vzr6M/4882477.jpg",
+        "project_heading": "Urban Oasis3",
+        "description": "This project focuses on creating an urban oasis within a bustling cityscape. The design incorporates lush greenery, tranquil water features, and open spaces, providing a serene retreat amidst the urban hustle. It aims to foster a connection with nature while offering a haven for relaxation and rejuvenation.",
+        "genre": "Backend(Node.js)"
+    },
+    {
+        "id": 4,
+        "image_link": "https://i.ibb.co/K7vzr6M/4882477.jpg",
+        "project_heading": "Urban Oasis4",
+        "description": "This project focuses on creating an urban oasis within a bustling cityscape. The design incorporates lush greenery, tranquil water features, and open spaces, providing a serene retreat amidst the urban hustle. It aims to foster a connection with nature while offering a haven for relaxation and rejuvenation.",
+        "genre": "Backend(Django)"
+    },
+    {
+        "id": 5,
+        "image_link": "https://i.ibb.co/bLNLrzd/19199295.jpg",
+        "project_heading": "Coastal Retreat5",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Frontend"
+    },
+    {
+        "id": 6,
+        "image_link": "https://i.ibb.co/WDfCmFm/pr.png",
+        "project_heading": "Coastal Retreat6",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Backend(Django)"
+    },
+    {
+        "id": 7,
+        "image_link": "https://i.ibb.co/WDfCmFm/pr.png",
+        "project_heading": "Coastal Retreat6",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Backend(Django)"
+    },
+    {
+        "id": 8,
+        "image_link": "https://i.ibb.co/WDfCmFm/pr.png",
+        "project_heading": "Coastal Retreat6",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Backend(Django)"
+    },
+    {
+        "id": 9,
+        "image_link": "https://i.ibb.co/WDfCmFm/pr.png",
+        "project_heading": "Coastal Retreat6",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Backend(Node.js)"
+    },
+    {
+        "id": 9,
+        "image_link": "https://i.ibb.co/WDfCmFm/pr.png",
+        "project_heading": "Coastal Retreat6",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Backend(Node.js)"
+    },
+    {
+        "id": 10,
+        "image_link": "https://i.ibb.co/WDfCmFm/pr.png",
+        "project_heading": "Coastal Retreat6",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Frontend"
+    },
+    {
+        "id": 11,
+        "image_link": "https://i.ibb.co/WDfCmFm/pr.png",
+        "project_heading": "Coastal Retreat6",
+        "description": "This project is a coastal retreat that harmonizes with its seaside environment. With sweeping ocean views and a blend of natural materials, this design embraces coastal living. The architecture prioritizes open spaces, allowing for seamless indoor-outdoor living, while the interior design reflects a laid-back coastal aesthetic.",
+        "genre": "Backend(Django)"
+    }
+  ]
+  
