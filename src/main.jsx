@@ -7,10 +7,13 @@ import {
 } from "react-router-dom";
 
 import routes from './Routes/routes';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-     <RouterProvider router={routes} />
+    <ThemeProvider>
+      <RouterProvider router={routes} />
+    </ThemeProvider>
   </React.StrictMode>,
 )
