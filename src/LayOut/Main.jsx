@@ -9,20 +9,29 @@ const Main = () => {
     const location = useLocation(); // React Router's useLocation hook
 
     useEffect(() => {
-     
+
         console.log('location: -->>', location);
         const path_name = location.pathname;
         if(path_name == '/aboutme' || path_name == '/'){
             setColor('#5BC3D5');
         }
-        else if(path_name == '/portfolio'){
+        else if(path_name == '/projects'){
             setColor('#EEA73B');
         }
-        
+        else if(path_name == '/workexperience'){
+            setColor('#5BC3D5');
+        }
+        else if(path_name == '/contact'){
+            setColor('#5BC3D5');
+        }
+        else if(path_name == '/blog'){
+            setColor('#5BC3D5');
+        }
+
     }, [location]); // Re-run effect when location changes
 
     return (
-        <div className="flex flex-col  lg:flex-row gap-2">
+        <div className="flex flex-col lg:flex-row">
             
              <div style={{backgroundColor:color}} className=' block lg:hidden'>
                <div className="navbar">

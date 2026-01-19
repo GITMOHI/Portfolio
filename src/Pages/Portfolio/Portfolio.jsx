@@ -1,154 +1,197 @@
 import React, { useEffect, useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom';
-import { FaPaperPlane } from "react-icons/fa";
-import ButtonFilters from './ButtonFilters';
-import EachProjects from './EachProjects';
-import { AnimatePresence,motion } from 'framer-motion';
-
-import { FaEye } from "react-icons/fa6";
-
-
-
+import { FaPaperPlane, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Portfolio = () => {
+    const [projects, setProjects] = useState([]);
+    const [filtered, setFiltered] = useState([]);
+    const [activeFilter, setActiveFilter] = useState('All');
 
-    const [projects,setProjects] = useState([]);
-    const [filtered,setFiltered] = useState([]);   
+    const genres = ['All', 'Web App', 'Frontend', 'Backend(Node.js)', 'Backend(Django)'];
 
+    useEffect(() => {
+        fetch('../../../public/Allprojects.json')
+            .then(res => res.json())
+            .then(data => {
+                setProjects(data);
+                setFiltered(data);
+            });
+    }, []);
 
-    useEffect(()=>{
-       fetch('../../../public/Allprojects.json')
-       .then(res=>res.json())
-       .then(data=>{
-        setProjects(data),
-        setFiltered(data)
-       })  
-    },[])
- 
-  
-
-
-    const handleFilter = (item)=>{
-        let temp = projects.filter(p=> p.genre == item);
-        if(item=='All'){
+    const handleFilter = (item) => {
+        setActiveFilter(item);
+        if (item === 'All') {
             setFiltered(projects);
             return;
         }
+        const temp = projects.filter(p => p.genre === item);
         setFiltered(temp);
-        
-    }
+    };
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
 
-    const handlehover =(heading)=>{
-        const element = document.getElementById(heading);
-        // console.log(element);
-        const list = element.classList;
-        list.remove('hidden');
-        list.add('absolute');
-       
-        const idd = heading+'layer';
-        const e1 =  document.getElementById(idd);
-        const l1 = e1.classList;
-        l1.add('bg-[#0f0e0e]');
-        l1.add('ease-in-out');
-        l1.add('duration-700');
-        l1.add('opacity-30');
-        console.log(e1);
-
-    } 
-
-    const handlehoverleave =(heading)=>{
-        const element = document.getElementById(heading);
-        // console.log(element);
-        const list = element.classList;
-        list.remove('absolute');
-        list.add('hidden');
-
-        const idd = heading+'layer';
-        const e1 =  document.getElementById(idd);
-        const l1 = e1.classList;
-        l1.remove('bg-[#0f0e0e]');
-        l1.remove('opacity-30');
-        console.log(e1);
-
-
-    } 
-
+    const itemVariants = {
+        hidden: { opacity: 0, scale: 0.9 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                duration: 0.4
+            }
+        },
+        exit: {
+            opacity: 0,
+            scale: 0.9,
+            transition: {
+                duration: 0.3
+            }
+        }
+    };
 
     return (
-        <div className=' border-red-500 flex flex-col items-center'>
-            
-            <div className=' bg-[#FAFAFA]  w-full flex flex-col items-center py-12'>
-                <div className=' bg-[#FAFAFA]  max-w-[70%] text-center space-y-3'>
-                    <h2 className='font-bold text-3xl'>Portfolio</h2>
-                    <p>Welcome to my online portfolio. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                    I'm taking on freelance work at the moment. Want some help building your software?</p>
+        <div className='w-full bg-white min-h-screen'>
+            {/* Header Section */}
+            <div className='bg-gradient-to-br from-[#FFF5E6] to-white w-full py-16 px-8'>
+                <motion.div
+                    initial={{ opacity: 0, y: -30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className='max-w-4xl mx-auto text-center space-y-6'
+                >
+                    <h1 className='font-black text-5xl text-gray-800 font-heading'>My Projects</h1>
+                    <p className='text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed'>
+                        Welcome to my portfolio. Here you'll find a collection of projects showcasing my skills in web development.
+                        I'm currently available for freelance work. Want help building your software?
+                    </p>
 
-                    <div className='flex flex-row justify-center mt-16 mb-16'>
-                    <NavLink to="/portfolio"><button className="btn  bg-[#EB9718] hover:bg-[#ff9c4c]"><div className=''><FaPaperPlane className='  font-bold  text-sm md:text-xl text-white'></FaPaperPlane></div> <p className='font-bold text-white text-sm md:text-base flex flex-row items-center'><p className='hidden lg:block '></p> Hire Me</p></button></NavLink> 
+                    <div className='pt-4'>
+                        <NavLink to="/contact">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className='btn bg-[#EEA73B] hover:bg-[#d89430] border-none text-white font-bold px-8 gap-2'
+                            >
+                                <FaPaperPlane />
+                                <span>Hire Me</span>
+                            </motion.button>
+                        </NavLink>
                     </div>
-                </div>
+                </motion.div>
             </div>
 
-            <div className=' flex flex-col items-center'>
-              <div className='my-12 flex-wrap flex mx-4'>``
-                <ButtonFilters handleFilter={handleFilter}></ButtonFilters>
-              </div>
+            {/* Filter Section */}
+            <div className='max-w-7xl mx-auto px-8 py-12'>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className='flex flex-wrap justify-center gap-3 mb-12'
+                >
+                    {genres.map(item => (
+                        <motion.button
+                            key={item}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => handleFilter(item)}
+                            className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
+                                activeFilter === item
+                                    ? 'bg-[#EEA73B] text-white shadow-lg'
+                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                            }`}
+                        >
+                            {item}
+                        </motion.button>
+                    ))}
+                </motion.div>
 
-             
-                
-                       
-            <div className='flex flex-col items-center'>
-                        <motion.div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[90%]' layout>                      
-                        {filtered.map(item=>{
+                {/* Projects Count */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className='text-center mb-8'
+                >
+                    <p className='text-gray-600 font-medium'>
+                        Showing <span className='text-[#EEA73B] font-bold'>{filtered.length}</span> project{filtered.length !== 1 ? 's' : ''}
+                    </p>
+                </motion.div>
 
-                           const{id,image_link,project_heading,description} = item;
-                            return(
-                                <AnimatePresence>
-                                    <motion.div key={id}
-                                    layout
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{duration:0.5}}
-                                    >
+                {/* Projects Grid */}
+                <AnimatePresence mode='popLayout'>
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+                    >
+                        {filtered.map(item => {
+                            const { id, image_link, project_heading, description } = item;
+                            return (
+                                <motion.div
+                                    key={id}
+                                    variants={itemVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="exit"
+                                    className='group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200'
+                                >
+                                    {/* Project Image */}
+                                    <div className='relative h-56 overflow-hidden bg-gray-100'>
+                                        <img
+                                            src={image_link}
+                                            alt={project_heading}
+                                            className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out'
+                                        />
+                                        {/* Overlay */}
+                                        <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
 
-                        <div onMouseEnter={()=>{handlehover(project_heading)}} onMouseLeave={()=>{handlehoverleave(project_heading)}} className=' h-50 overflow-hidden relative flex flex-col  lg:flex-row items-start gap-4 bg-[#FAFAFA] border rounded-xl '>
-                                
-                                <div id={project_heading+"layer"} className='layer z-10 flex flex-col items-center justify-center   absolute w-full h-full transition ease-in-out cursor-pointer duration-200'>
-                                </div>
-
-
-                                    <div id={project_heading} className=' z-50 w-[30%] hidden top-[30%] left-[40%] '>
-                                    
-                                    <p><button className=' hover:bg-white btn font-bold bg-white mb-3 flex flex-row w-52 text-base'><FaEye></FaEye>View Case Study</button></p>
-                                    <p><button className=' hover:bg-white btn cursor-pointer font-bold bg-white text-blue-500 text-center  w-[70%] '>Live Link</button></p>
-                                    
+                                        {/* Hover Buttons */}
+                                        <div className='absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0'>
+                                            <button className='bg-white text-[#EEA73B] px-6 py-3 rounded-full font-bold text-sm flex items-center gap-2 shadow-xl hover:bg-[#EEA73B] hover:text-white transition-colors'>
+                                                <FaExternalLinkAlt />
+                                                <span>View Live</span>
+                                            </button>
+                                            <button className='bg-gray-900 text-white px-6 py-3 rounded-full font-bold text-sm flex items-center gap-2 shadow-xl hover:bg-gray-800 transition-colors'>
+                                                <FaGithub />
+                                                <span>Source Code</span>
+                                            </button>
+                                        </div>
                                     </div>
-                                
-                                <img src={image_link} className='w-56 h-44' alt="" />
-                                <div className='space-y-2 p-4'>
-                                    <h2 className='font-bold text-xl'>{project_heading}</h2>
-                                    <p>{description}</p>
-                                </div>
 
-                        </div>   
+                                    {/* Project Info */}
+                                    <div className='p-6'>
+                                        <h3 className='text-xl font-bold text-gray-800 mb-3 font-heading group-hover:text-[#EEA73B] transition-colors line-clamp-1'>
+                                            {project_heading}
+                                        </h3>
+                                        <p className='text-gray-600 text-sm leading-relaxed line-clamp-3'>
+                                            {description}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </motion.div>
+                </AnimatePresence>
 
-                                        
-                                    
-                                    </motion.div>
-                                </AnimatePresence>
-                            )
-                        })
-                            
-                                
-                        }        
-                        </motion.div>
-                      </div>
-            
+                {/* Empty State */}
+                {filtered.length === 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className='text-center py-20'
+                    >
+                        <p className='text-gray-500 text-lg'>No projects found in this category.</p>
+                    </motion.div>
+                )}
             </div>
-
         </div>
     );
 };

@@ -14,7 +14,7 @@ const Profile = ({color}) => {
                         <img src="../../../public/images/bw.jpg" />
                     </div>
                 </div>
-                <p className='text-center'>Hi, my name is Simon Doe and I'm a fullstack developer. Welcome to my personal website!</p>
+                <p className='text-center'>Hi, my name is Mohi and I'm a Junior Software Engineer at Lab3. Welcome to my personal website!</p>
              
              
                 <div className='flex flex-row gap-4 mt-8'>

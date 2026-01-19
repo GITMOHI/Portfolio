@@ -35,14 +35,10 @@ const Skills = () => {
             </div>
 
 
-            <div className='grid grid-cols-2  lg:grid-cols-4 gap-10 mt-14 pr-4 lg:pr-16'>
+            <div className='grid grid-cols-2  lg:grid-cols-4 gap-10 mt-14 pr-4 lg:pr-16 mb-8'>
                {
                   mySkills.map(s=><Skill key = {s.name} s={s}></Skill>)
                }
-            </div>
-
-            <div className='flex flex-row justify-center mt-16 mb-16 lg:-ml-16'>
-               <NavLink to="/serviceandprice"><button className="btn  bg-[#5BC3D5] hover:bg-[#398d9c]"><div className='mr-1 md:mr-2 rounded-full bg-white p-1'><FaArrowRight className=' bg-white font-bold  text-sm md:text-xl text-[#5BC3D5]'></FaArrowRight></div> <p className='font-bold text-white text-sm md:text-base flex flex-row items-center'><p className='hidden lg:block mr-2'>Services & </p> Prices</p></button></NavLink> 
             </div>
 
         </div>

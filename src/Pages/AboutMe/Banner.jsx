@@ -14,15 +14,15 @@ const Banner = () => {
                     <div className='w-full lg:w-3/5 flex flex-col items-start px-8 lg:pr-12 lg:-ml-4 lg:pt-10  pb-12 lg:pb-24'>
                          <div className=''>
                            <h1 className='font-black text-4xl mb-2'>Mohi</h1>
-                           <p className='text-2xl font-thin mb-4'>Fullstack Developer</p>
-                           <p>I'm a software engineer specialised in frontend and backend development for 
+                           <p className='text-2xl font-thin mb-4'>Junior Software Engineer at Lab3</p>
+                           <p>I'm a Junior Software Engineer at Lab3, specializing in frontend and backend development for
                             complex scalable web apps. I write about software development on my blog. Want to know how I may
                              help your project? Check out my project portfolio and online resume.</p>
-                           
+
                          </div>
 
                          <div className='flex  lg:flex-row gap-4 mt-8'>
-                            <Link to="/portfolio"><button className="btn   md:btn-wide  bg-[#5BC3D5] hover:bg-[#398d9c]"><div className='mr-1 md:mr-2 rounded-full bg-white p-1'><FaArrowRight className=' bg-white font-bold  text-sm md:text-xl text-[#5BC3D5]'></FaArrowRight></div> <p className='font-bold text-white text-sm md:text-base flex flex-row items-center'><p className='hidden lg:block'>View</p> Portfolio</p></button></Link>
+                            <Link to="/projects"><button className="btn   md:btn-wide  bg-[#5BC3D5] hover:bg-[#398d9c]"><div className='mr-1 md:mr-2 rounded-full bg-white p-1'><FaArrowRight className=' bg-white font-bold  text-sm md:text-xl text-[#5BC3D5]'></FaArrowRight></div> <p className='font-bold text-white text-sm md:text-base flex flex-row items-center'><p className='hidden lg:block'>View</p> Projects</p></button></Link>
                             <Link to="/resume"> <button className="btn   md:btn-wide bg-[#3C3C3C] hover:bg-[#222121]"> <div className=' mr-1 md:mr-2 rounded-full bg-white p-1'><IoDocumentTextOutline className='bg-white font-bold text-sm md:text-xl'></IoDocumentTextOutline></div><p className='font-bold text-white text-sm md:text-base flex flex-row items-center '><p className='hidden lg:block'>View</p> Resume</p></button></Link>
                          </div>   
                     </div>

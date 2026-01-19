@@ -4,8 +4,10 @@ import {  createBrowserRouter } from "react-router-dom";
 import AboutMe from '../Pages/AboutMe/AboutMe';
 import Main from '../LayOut/Main';
 import Portfolio from '../Pages/Portfolio/Portfolio';
-import ServicesAndPrices from '../Pages/ServicesAndPrices/ServicesAndPrices';
 import Resume from '../Pages/Resume/Resume';
+import WorkExperience from '../Pages/WorkExperience/WorkExperience';
+import Contact from '../Pages/Contact/Contact';
+import Blog from '../Pages/Blog/Blog';
 
 
 const routes = createBrowserRouter([
@@ -22,16 +24,24 @@ const routes = createBrowserRouter([
            element:<AboutMe></AboutMe>
         },
         {
-          path:'/portfolio',
+          path:'/projects',
           element:<Portfolio></Portfolio>
-        },
-        {
-          path:'/serviceandprice',
-          element:<ServicesAndPrices></ServicesAndPrices>
         },
         {
            path:'/resume',
            element:<Resume></Resume>
+        },
+        {
+           path:'/workexperience',
+           element:<WorkExperience></WorkExperience>
+        },
+        {
+           path:'/contact',
+           element:<Contact></Contact>
+        },
+        {
+           path:'/blog',
+           element:<Blog></Blog>
         }
       ]
     },
