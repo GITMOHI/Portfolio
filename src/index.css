@@ -4,11 +4,45 @@
 
 @layer base {
   body {
-    @apply font-sans bg-white text-gray-900;
+    @apply font-sans bg-neutral-50 text-neutral-900 antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-extrabold;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-bold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-neutral-800 mb-4 tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-neutral-600 max-w-3xl;
+  }
+
+  .card-professional {
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-neutral-200;
+  }
+
+  .btn-professional {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow-md;
   }
 }
 
