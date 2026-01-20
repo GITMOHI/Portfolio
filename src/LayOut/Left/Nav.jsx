@@ -83,8 +83,8 @@ const Nav = () => {
                         <button className="btn hover:bg-gray-700 text-base bg-[#377681] border-none text-white font-bold"> <FaRegPaperPlane></FaRegPaperPlane> Hire Me</button>
                      </NavLink>
                   </div>
-               
-               
+
+
                </div>
            </div>
         </div>

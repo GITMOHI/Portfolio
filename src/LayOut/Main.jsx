@@ -36,12 +36,12 @@ const Main = () => {
              <div style={{backgroundColor:color}} className=' block lg:hidden'>
                <div className="navbar">
                     <div className="flex-none">
-                        <button className="btn btn-square btn-ghost text-white ">
+                        <button className="btn btn-square btn-ghost text-white border-none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </button>
                     </div>
                     <div className="flex-1">
-                        <a className="btn btn-ghost text-2xl text-white font-bold">Mohi</a>
+                        <a className="btn btn-ghost text-2xl text-white font-bold border-none">Mohi</a>
                     </div>
                   
                     </div>
