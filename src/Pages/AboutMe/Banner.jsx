@@ -13,7 +13,7 @@ const Banner = () => {
                         <h1 className='font-black text-4xl mb-2'>Mohi</h1>
                         <p className='text-2xl font-thin mb-4'>Junior Software Engineer at Lab3</p>
                         <p>I'm a Junior Software Engineer at Lab3, specializing in frontend and backend development for
-                            complex scalable web apps. I write about software development on my blog. Want to know how I may
+                            complex scalable web apps. I write about software development on my blog. Want to know how I  may
                             help your project? Check out my project portfolio and online resume.</p>
                     </div>
 
