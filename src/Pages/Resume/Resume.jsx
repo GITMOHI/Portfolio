@@ -47,7 +47,7 @@ const Resume = () => {
             <div className="flex flex-row justify-between gap-0 mt-10 items-center">
               <div className="   ">
                 <img
-                  src="../../../public/images/bw1.jpg"
+                  src="/images/bw1.jpg"
                   className="w-32 rounded-full"
                   alt=""
                 />
@@ -111,7 +111,7 @@ const Resume = () => {
                 <div className="flex flex-row justify-between items-start mt-3 mb-2">
                   <div className="flex flex-row gap-4 items-start">
                     <img
-                      src="../../../public/images/lab3.png"
+                      src="/images/lab3.png"
                       alt="Lab3"
                       className="w-12 h-12 object-contain"
                     />

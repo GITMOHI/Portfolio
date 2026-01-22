@@ -7,7 +7,7 @@ const FeaturedProjects = () => {
     const [featProj, setfetProj] = useState([]);
 
     useEffect(() => {
-        fetch('../../../public/FeatProjects.json')
+        fetch('/FeatProjects.json')
             .then(res => res.json())
             .then(data => setfetProj(data));
     }, []);

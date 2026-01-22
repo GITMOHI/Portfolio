@@ -2,7 +2,6 @@ import React from 'react';
 import { FaArrowRight } from "react-icons/fa6";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
-import bannerImage from '../../../public/images/bn2.jpeg';
 
 
 const Banner = () => {
@@ -15,7 +14,7 @@ const Banner = () => {
                         <p className='text-2xl font-thin mb-4'>Junior Software Engineer at Lab3</p>
                         <p>I'm a Junior Software Engineer at Lab3, specializing in frontend and backend development for
                             complex scalable web apps. I write about software development on my blog. Want to know how I  may
-                            help your project? Check out my project portfolio and online resume..,,</p>
+                            help your project? Check out my project portfolio and online resume..,,dsadfsa</p>
                     </div>
 
                     <div className='flex lg:flex-row gap-4 mt-8'>
@@ -43,7 +42,7 @@ const Banner = () => {
                 </div>
 
                 <div className='px-8'>
-                    <img src={bannerImage} className='w-full h-80 md:h-96 lg:py-10' alt="" />
+                    <img src="/images/bn2.jpeg" className='w-full h-80 md:h-96 lg:py-10' alt="" />
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@ const Portfolio = () => {
     const genres = ['All', 'Web App', 'Frontend', 'Backend(Node.js)', 'Backend(Django)'];
 
     useEffect(() => {
-        fetch('../../../public/Allprojects.json')
+        fetch('/Allprojects.json')
             .then(res => res.json())
             .then(data => {
                 setProjects(data);

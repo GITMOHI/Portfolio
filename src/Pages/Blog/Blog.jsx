@@ -6,7 +6,7 @@ const Blog = () => {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        fetch('../../../public/blog.json')
+        fetch('/blog.json')
             .then(res => res.json())
             .then(data => {
                 setBlogs(data);
@@ -22,7 +22,7 @@ const Blog = () => {
                         date: "January 15, 2024",
                         readTime: "5 min read",
                         category: "React",
-                        image: "../../../public/images/19199295.jpg"
+                        image: "/images/19199295.jpg"
                     },
                     {
                         id: 2,
@@ -31,7 +31,7 @@ const Blog = () => {
                         date: "January 10, 2024",
                         readTime: "8 min read",
                         category: "Backend",
-                        image: "../../../public/images/4882477.jpg"
+                        image: "/images/4882477.jpg"
                     },
                     {
                         id: 3,
@@ -40,7 +40,7 @@ const Blog = () => {
                         date: "January 5, 2024",
                         readTime: "6 min read",
                         category: "CSS",
-                        image: "../../../public/images/7217.jpg"
+                        image: "/images/7217.jpg"
                     }
                 ]);
             });

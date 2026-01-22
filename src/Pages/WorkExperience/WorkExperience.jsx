@@ -119,7 +119,7 @@ const WorkExperience = () => {
                                     <div className='flex items-start gap-4 mb-4'>
                                         <div className='bg-white p-3 rounded-xl shadow-md border border-gray-200'>
                                             <img
-                                                src="../../../public/images/lab3.png"
+                                                src="/images/lab3.png"
                                                 alt={exp.company}
                                                 className='w-14 h-14 object-contain'
                                             />
