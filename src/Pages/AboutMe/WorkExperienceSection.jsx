@@ -59,7 +59,7 @@ const WorkExperienceSection = () => {
                                 <div className='flex items-start justify-between gap-4'>
                                     <div className='flex items-center gap-3'>
                                         <img
-                                            src="../../../public/images/lab3.png"
+                                            src="/images/lab3.png"
                                             alt="Lab3"
                                             className='w-10 h-10 object-contain'
                                         />
@@ -91,7 +91,7 @@ const WorkExperienceSection = () => {
                             <div className='flex-1 bg-white rounded-xl p-4 shadow-md border border-gray-200'>
                                 <div className='flex items-center gap-3'>
                                     <img
-                                        src="../../../public/images/lab3.png"
+                                        src="/images/lab3.png"
                                         alt="Lab3"
                                         className='w-10 h-10 object-contain'
                                     />

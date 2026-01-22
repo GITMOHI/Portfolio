@@ -11,7 +11,7 @@ const Profile = ({color}) => {
                 <h3 className='text-2xl font-bold'>Mohi</h3>
                 <div className="avatar">
                     <div className="w-32 rounded-full">
-                        <img src="../../../public/images/bw.jpg" />
+                        <img src="/images/bw.jpg" />
                     </div>
                 </div>
                 <p className='text-center'>Hi, my name is Mohi and I'm a Junior Software Engineer at Lab3.</p>

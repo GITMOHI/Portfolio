@@ -7,7 +7,7 @@ const Blogs = () => {
 
     const [blogs,setblogs]=useState([]);
     useEffect(()=>{
-        fetch('../../../public/blog.json')
+        fetch('/blog.json')
         .then(res=>res.json())
         .then(data=>setblogs(data))
     },[]);
