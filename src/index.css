@@ -41,6 +41,7 @@
 
   .site-header,
   .site-footer,
+  .resume-no-print,
   button,
   nav.navbar {
     display: none !important;
