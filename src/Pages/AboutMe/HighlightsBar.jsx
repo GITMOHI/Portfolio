@@ -10,21 +10,19 @@ const items = [
                 href="https://cuet.ac.bd/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex max-w-full items-center gap-2.5 rounded-lg text-left transition hover:text-brand dark:hover:text-emerald-400"
+                aria-label="B.Sc. Computer Science and Engineering, Chittagong University of Engineering and Technology"
+                className="inline-flex max-w-full items-center justify-center gap-2.5 rounded-lg text-left transition hover:text-brand dark:hover:text-emerald-400 sm:justify-start"
             >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-200/90 bg-white shadow-sm dark:border-zinc-600 dark:bg-zinc-800">
                     <img
                         src="/images/cuet.png"
-                        alt="CUET"
+                        alt=""
                         className="h-7 w-7 object-contain"
                         width={28}
                         height={28}
                     />
                 </span>
-                <span className="min-w-0 leading-snug">
-                    B.Sc. CSE
-                    <span className="block text-xs font-normal text-zinc-500 dark:text-zinc-400">Chittagong University of Engineering & Technology</span>
-                </span>
+                <span>CSE, CUET</span>
             </a>
         ),
     },
