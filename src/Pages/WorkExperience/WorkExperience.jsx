@@ -75,29 +75,32 @@ const WorkExperience = () => {
                     <p className="text-lg text-zinc-600 dark:text-zinc-400">Professional journey at Lab3</p>
                 </motion.div>
 
-                <div className="relative">
-                    <div className="absolute bottom-0 left-8 top-0 w-1 -translate-x-1/2 transform bg-gradient-to-b from-brand via-brand-mid to-zinc-300 dark:to-zinc-600 md:left-1/2" />
+                <div className="relative isolate">
+                    <div
+                        className="absolute bottom-0 left-8 top-0 z-0 w-1 -translate-x-1/2 transform bg-gradient-to-b from-brand via-brand-mid to-zinc-300 dark:to-zinc-600 md:left-1/2"
+                        aria-hidden
+                    />
 
                     {experiences.map((exp, index) => (
                         <motion.div
                             key={exp.id}
                             variants={itemVariants}
-                            className={`relative mb-16 ${
+                            className={`relative z-[1] mb-16 ${
                                 index % 2 === 0 ? 'md:pr-1/2' : 'md:pl-1/2 md:ml-auto'
                             }`}
                         >
-                            <div className="absolute left-8 z-10 h-6 w-6 -translate-x-1/2 transform rounded-full border-4 border-brand bg-white shadow-lg dark:bg-zinc-950 md:left-1/2">
+                            <div className="absolute left-8 z-20 flex h-6 w-6 -translate-x-1/2 transform items-center justify-center rounded-full border-4 border-brand bg-white shadow-lg ring-4 ring-white dark:bg-zinc-950 dark:ring-zinc-950 md:left-1/2">
                                 {exp.current && (
                                     <div className="absolute inset-0 animate-ping rounded-full bg-brand opacity-75 motion-reduce:animate-none" />
                                 )}
                             </div>
 
-                            <div className={`ml-20 md:ml-0 ${index % 2 === 0 ? 'md:mr-12' : 'md:ml-12'}`}>
+                            <div className={`relative z-[1] ml-20 md:ml-0 ${index % 2 === 0 ? 'md:mr-12' : 'md:ml-12'}`}>
                                 <motion.div
                                     whileHover={{ scale: 1.02, y: -5 }}
                                     transition={{ duration: 0.3 }}
-                                    className={`rounded-2xl border-l-4 bg-white p-8 shadow-xl dark:bg-zinc-900/80 ${
-                                        exp.current ? 'border-brand' : 'border-zinc-300 dark:border-zinc-600'
+                                    className={`rounded-2xl border-l-4 border border-zinc-200/90 bg-white p-8 shadow-xl dark:border-zinc-700 dark:bg-zinc-900 ${
+                                        exp.current ? 'border-l-brand' : 'border-l-zinc-300 dark:border-l-zinc-600'
                                     }`}
                                 >
                                     {exp.current && (

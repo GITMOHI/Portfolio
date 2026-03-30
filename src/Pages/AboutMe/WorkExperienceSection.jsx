@@ -37,14 +37,14 @@ const WorkExperienceSection = () => {
                         </p>
                     </div>
 
-                    <div className="relative mt-10 overflow-hidden rounded-2xl border border-zinc-200/80 bg-gradient-to-r from-brand/10 to-transparent p-6 dark:border-zinc-700/80 dark:from-brand/15 sm:p-8 lg:pr-16">
+                    <div className="relative isolate mt-10 overflow-hidden rounded-2xl border border-zinc-200/80 bg-gradient-to-r from-brand/10 to-transparent p-6 dark:border-zinc-700/80 dark:from-brand/15 sm:p-8 lg:pr-16">
                         <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-brand/10 dark:bg-brand/5" aria-hidden />
                         <div
-                            className="absolute bottom-8 left-8 top-8 w-0.5 bg-gradient-to-b from-brand to-brand/30 dark:to-brand/20"
+                            className="absolute bottom-8 left-8 top-8 z-0 w-0.5 bg-gradient-to-b from-brand to-brand/30 dark:to-brand/20"
                             aria-hidden
                         />
 
-                        <div className="relative space-y-6 pl-8 sm:pl-10">
+                        <div className="relative z-[1] space-y-6 pl-8 sm:pl-10">
                             <motion.div
                                 initial={{ opacity: 0, x: -16 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -56,7 +56,7 @@ const WorkExperienceSection = () => {
                                     <div className="h-4 w-4 rounded-full border-4 border-white bg-brand shadow-md dark:border-zinc-900" />
                                     <div className="absolute inset-0 h-4 w-4 animate-ping rounded-full bg-brand/40 motion-reduce:animate-none" />
                                 </div>
-                                <div className="flex-1 rounded-xl border border-brand/25 bg-white p-5 shadow-soft dark:border-brand/30 dark:bg-zinc-950/80">
+                                <div className="relative z-[1] flex-1 rounded-xl border border-brand/25 bg-white p-5 shadow-soft dark:border-brand/30 dark:bg-zinc-900">
                                     <div className="flex flex-wrap items-start justify-between gap-3">
                                         <div className="flex items-center gap-3">
                                             <img
@@ -86,7 +86,7 @@ const WorkExperienceSection = () => {
                                 className="flex items-start gap-4"
                             >
                                 <div className="z-10 mt-1.5 h-4 w-4 shrink-0 rounded-full border-4 border-white bg-zinc-300 shadow-sm dark:border-zinc-900 dark:bg-zinc-600" />
-                                <div className="flex-1 rounded-xl border border-zinc-200 bg-white p-5 shadow-soft dark:border-zinc-700 dark:bg-zinc-950/80">
+                                <div className="relative z-[1] flex-1 rounded-xl border border-zinc-200 bg-white p-5 shadow-soft dark:border-zinc-700 dark:bg-zinc-900">
                                     <div className="flex items-center gap-3">
                                         <img
                                             src="/images/lab3.png"
