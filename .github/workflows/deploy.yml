@@ -26,6 +26,9 @@ jobs:
       #   run: npm run lint
 
       - name: Build project
+        env:
+          # Optional: GitHub repo → Settings → Secrets → Actions → VITE_WEB3FORMS_ACCESS_KEY
+          VITE_WEB3FORMS_ACCESS_KEY: ${{ secrets.VITE_WEB3FORMS_ACCESS_KEY }}
         run: npm run build
 
       - name: Deploy to Netlify
