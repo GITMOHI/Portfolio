@@ -38,6 +38,8 @@ const EDUCATION = [
         degree: 'Bachelor of Science in Computer Science & Engineering',
         period: '2020 – 2025',
         location: 'Chittagong, Bangladesh',
+        logo: '/images/cuet.png',
+        href: 'https://cuet.ac.bd/',
     },
     {
         school: 'Armed Police Battalion Public School And College',
@@ -247,14 +249,46 @@ const Resume = () => {
                                     {EDUCATION.map((edu) => (
                                         <li
                                             key={edu.school}
-                                            className="border-l-2 border-resume/70 pl-5 dark:border-emerald-500/50"
+                                            className="flex gap-4 border-l-2 border-resume/70 pl-5 dark:border-emerald-500/50"
                                         >
-                                            <h4 className="font-heading font-bold text-zinc-900 dark:text-zinc-100">{edu.school}</h4>
-                                            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{edu.degree}</p>
-                                            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-500 dark:text-zinc-500">
-                                                <span className="font-semibold text-zinc-600 dark:text-zinc-400">{edu.period}</span>
-                                                <span>·</span>
-                                                <span>{edu.location}</span>
+                                            {edu.logo ? (
+                                                <a
+                                                    href={edu.href}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="group flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:border-resume/40 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-emerald-500/50"
+                                                    aria-label={`${edu.school} (opens in new tab)`}
+                                                >
+                                                    <img
+                                                        src={edu.logo}
+                                                        alt=""
+                                                        className="h-10 w-10 object-contain p-0.5"
+                                                    />
+                                                </a>
+                                            ) : null}
+                                            <div className="min-w-0 flex-1">
+                                                <h4 className="font-heading font-bold text-zinc-900 dark:text-zinc-100">
+                                                    {edu.href ? (
+                                                        <a
+                                                            href={edu.href}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="transition hover:text-resume dark:hover:text-emerald-400"
+                                                        >
+                                                            {edu.school}
+                                                        </a>
+                                                    ) : (
+                                                        edu.school
+                                                    )}
+                                                </h4>
+                                                <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{edu.degree}</p>
+                                                <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-500 dark:text-zinc-500">
+                                                    <span className="font-semibold text-zinc-600 dark:text-zinc-400">
+                                                        {edu.period}
+                                                    </span>
+                                                    <span>·</span>
+                                                    <span>{edu.location}</span>
+                                                </div>
                                             </div>
                                         </li>
                                     ))}
