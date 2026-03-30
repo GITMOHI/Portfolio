@@ -2,7 +2,7 @@ import React from 'react';
 
 const items = [
     { label: 'Role', value: 'Full-stack engineer' },
-    { label: 'Focus', value: 'React · Node · APIs' },
+    { label: 'Focus', value: 'React · Node · Golang' },
     { label: 'Based in', value: 'Chittagong, BD' },
     { label: 'Status', value: 'Open to opportunities' },
 ];
