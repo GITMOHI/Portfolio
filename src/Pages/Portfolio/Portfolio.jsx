@@ -12,8 +12,8 @@ const Portfolio = () => {
 
     useEffect(() => {
         fetch('/Allprojects.json')
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 setProjects(data);
                 setFiltered(data);
             });
@@ -25,87 +25,78 @@ const Portfolio = () => {
             setFiltered(projects);
             return;
         }
-        const temp = projects.filter(p => p.genre === item);
-        setFiltered(temp);
+        setFiltered(projects.filter((p) => p.genre === item));
     };
 
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
+            transition: { staggerChildren: 0.08 },
+        },
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, scale: 0.9 },
+        hidden: { opacity: 0, scale: 0.96 },
         visible: {
             opacity: 1,
             scale: 1,
-            transition: {
-                duration: 0.4
-            }
+            transition: { duration: 0.35 },
         },
         exit: {
             opacity: 0,
-            scale: 0.9,
-            transition: {
-                duration: 0.3
-            }
-        }
+            scale: 0.96,
+            transition: { duration: 0.25 },
+        },
     };
 
     return (
-        <div className='w-full bg-white min-h-screen'>
-            {/* Header Section */}
-            <div className='bg-gradient-to-br from-[#FFF5E6] to-white w-full py-16 px-8'>
-                <motion.div
-                    initial={{ opacity: 0, y: -30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className='max-w-4xl mx-auto text-center space-y-6'
-                >
-                    <h1 className='font-black text-5xl text-gray-800 font-heading'>My Projects</h1>
-                    <p className='text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed'>
-                        Welcome to my portfolio. Here you'll find a collection of projects showcasing my skills in web development.
-                        I'm currently available for freelance work. Want help building your software?
-                    </p>
-
-                    <div className='pt-4'>
-                        <NavLink to="/contact">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className='btn bg-[#EEA73B] hover:bg-[#d89430] border-none text-white font-bold px-8 gap-2'
+        <div className="min-h-screen w-full bg-white dark:bg-zinc-950">
+            <header className="border-b border-orange-200/60 bg-gradient-to-br from-surface-warm to-white dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-950">
+                <div className="mx-auto max-w-4xl px-6 py-16 text-center sm:px-8 sm:py-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-portfolio">Archive</p>
+                        <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
+                            Work
+                        </h1>
+                        <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+                            Production and exploratory builds across the stack. Available for selective freelance work.
+                        </p>
+                        <div className="mt-8">
+                            <NavLink
+                                to="/contact"
+                                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-portfolio px-8 py-3.5 text-base font-bold text-white shadow-soft transition hover:bg-portfolio-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-portfolio focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-950"
                             >
-                                <FaPaperPlane />
-                                <span>Hire Me</span>
-                            </motion.button>
-                        </NavLink>
-                    </div>
-                </motion.div>
-            </div>
+                                <FaPaperPlane aria-hidden />
+                                Start a conversation
+                            </NavLink>
+                        </div>
+                    </motion.div>
+                </div>
+            </header>
 
-            {/* Filter Section */}
-            <div className='max-w-7xl mx-auto px-8 py-12'>
+            <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:py-16">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className='flex flex-wrap justify-center gap-3 mb-12'
+                    transition={{ delay: 0.15 }}
+                    className="mb-10 flex flex-wrap justify-center gap-2 sm:gap-3"
                 >
-                    {genres.map(item => (
+                    {genres.map((item) => (
                         <motion.button
                             key={item}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            type="button"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.98 }}
                             onClick={() => handleFilter(item)}
-                            className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
+                            className={`cursor-pointer rounded-full px-5 py-2.5 text-sm font-semibold transition duration-200 motion-reduce:transition-none ${
                                 activeFilter === item
-                                    ? 'bg-[#EEA73B] text-white shadow-lg'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                    ? 'bg-portfolio text-white shadow-soft'
+                                    : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
                             }`}
                         >
                             {item}
@@ -113,26 +104,19 @@ const Portfolio = () => {
                     ))}
                 </motion.div>
 
-                {/* Projects Count */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className='text-center mb-8'
-                >
-                    <p className='text-gray-600 font-medium'>
-                        Showing <span className='text-[#EEA73B] font-bold'>{filtered.length}</span> project{filtered.length !== 1 ? 's' : ''}
-                    </p>
-                </motion.div>
+                <p className="mb-10 text-center text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                    Showing <span className="font-bold text-portfolio">{filtered.length}</span> project
+                    {filtered.length !== 1 ? 's' : ''}
+                </p>
 
-                {/* Projects Grid */}
-                <AnimatePresence mode='popLayout'>
+                <AnimatePresence mode="popLayout">
                     <motion.div
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
-                        className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+                        className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
                     >
-                        {filtered.map(item => {
+                        {filtered.map((item) => {
                             const { id, image_link, project_heading, description } = item;
                             return (
                                 <motion.div
@@ -141,37 +125,38 @@ const Portfolio = () => {
                                     initial="hidden"
                                     animate="visible"
                                     exit="exit"
-                                    className='group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200'
+                                    layout
+                                    className="group overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-soft transition-shadow duration-300 hover:shadow-card dark:border-zinc-700/80 dark:bg-zinc-900/50"
                                 >
-                                    {/* Project Image */}
-                                    <div className='relative h-56 overflow-hidden bg-gray-100'>
+                                    <div className="relative h-56 overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                                         <img
                                             src={image_link}
                                             alt={project_heading}
-                                            className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out'
+                                            className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                                         />
-                                        {/* Overlay */}
-                                        <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500'></div>
-
-                                        {/* Hover Buttons */}
-                                        <div className='absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0'>
-                                            <button className='bg-white text-[#EEA73B] px-6 py-3 rounded-full font-bold text-sm flex items-center gap-2 shadow-xl hover:bg-[#EEA73B] hover:text-white transition-colors'>
-                                                <FaExternalLinkAlt />
-                                                <span>View Live</span>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none dark:from-zinc-950" />
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 transition duration-300 group-hover:opacity-100 motion-reduce:transition-none">
+                                            <button
+                                                type="button"
+                                                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-portfolio shadow-xl transition hover:bg-portfolio hover:text-white dark:bg-zinc-100"
+                                            >
+                                                <FaExternalLinkAlt aria-hidden />
+                                                Live
                                             </button>
-                                            <button className='bg-gray-900 text-white px-6 py-3 rounded-full font-bold text-sm flex items-center gap-2 shadow-xl hover:bg-gray-800 transition-colors'>
-                                                <FaGithub />
-                                                <span>Source Code</span>
+                                            <button
+                                                type="button"
+                                                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-zinc-900 px-6 py-3 text-sm font-bold text-white shadow-xl transition hover:bg-zinc-800 dark:bg-zinc-950 dark:ring-1 dark:ring-zinc-700"
+                                            >
+                                                <FaGithub aria-hidden />
+                                                Source
                                             </button>
                                         </div>
                                     </div>
-
-                                    {/* Project Info */}
-                                    <div className='p-6'>
-                                        <h3 className='text-xl font-bold text-gray-800 mb-3 font-heading group-hover:text-[#EEA73B] transition-colors line-clamp-1'>
+                                    <div className="p-6">
+                                        <h3 className="line-clamp-1 font-heading text-xl font-bold text-zinc-900 transition-colors group-hover:text-portfolio dark:text-zinc-100">
                                             {project_heading}
                                         </h3>
-                                        <p className='text-gray-600 text-sm leading-relaxed line-clamp-3'>
+                                        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                                             {description}
                                         </p>
                                     </div>
@@ -181,15 +166,14 @@ const Portfolio = () => {
                     </motion.div>
                 </AnimatePresence>
 
-                {/* Empty State */}
                 {filtered.length === 0 && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className='text-center py-20'
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="py-20 text-center text-lg text-zinc-500 dark:text-zinc-400"
                     >
-                        <p className='text-gray-500 text-lg'>No projects found in this category.</p>
-                    </motion.div>
+                        Nothing in this filter.
+                    </motion.p>
                 )}
             </div>
         </div>

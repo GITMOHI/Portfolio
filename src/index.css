@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-sans bg-white text-gray-900;
+    @apply font-sans bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -12,52 +12,51 @@
   }
 }
 
-/* Custom scrollbar */
+@layer utilities {
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-950;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+  @apply bg-zinc-100 dark:bg-zinc-900;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 rounded-full;
+  @apply rounded-full bg-zinc-300 dark:bg-zinc-600;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500;
+  @apply bg-zinc-400 dark:bg-zinc-500;
 }
 
-/* Print styles for PDF download */
 @media print {
   @page {
     margin: 0.5in;
   }
 
-  /* Hide navigation and buttons when printing */
+  .site-header,
+  .site-footer,
   button,
-  nav,
-  .navbar,
-  [class*="Left"],
-  [class*="lg:w-[277px]"] {
+  nav.navbar {
     display: none !important;
   }
 
-  /* Ensure white background for printing */
   body,
   * {
     background: white !important;
     color: black !important;
   }
 
-  /* Prevent page breaks inside elements */
   .card,
   .flex {
     page-break-inside: avoid;
   }
 
-  /* Make resume full width when printing */
   .card {
     width: 100% !important;
     box-shadow: none !important;
