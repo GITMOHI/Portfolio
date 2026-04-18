@@ -2,169 +2,138 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaCalendarAlt, FaClock, FaArrowRight } from 'react-icons/fa';
 
+const normalizePost = (blog, index) => ({
+    id: blog.id ?? index,
+    title: blog.title ?? blog.blog_name ?? 'Blog post',
+    excerpt: blog.excerpt ?? blog.description ?? '',
+    image: blog.image ?? blog.image_url ?? '/images/19199295.jpg',
+    date: blog.date ?? '',
+    readTime: blog.readTime ?? '5 min read',
+    category: blog.category ?? 'Article',
+});
+
 const Blog = () => {
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
         fetch('/blog.json')
-            .then(res => res.json())
-            .then(data => {
-                setBlogs(data);
-            })
-            .catch(err => {
-                console.error('Error loading blogs:', err);
-                // Fallback data if JSON doesn't load
-                setBlogs([
-                    {
-                        id: 1,
-                        title: "Getting Started with React Hooks",
-                        excerpt: "Learn how to use React Hooks to manage state and side effects in functional components. This comprehensive guide covers useState, useEffect, and custom hooks.",
-                        date: "January 15, 2024",
-                        readTime: "5 min read",
-                        category: "React",
-                        image: "/images/19199295.jpg"
-                    },
-                    {
-                        id: 2,
-                        title: "Building Scalable Node.js Applications",
-                        excerpt: "Explore best practices for building scalable backend applications with Node.js and Express. Learn about architecture patterns, error handling, and performance optimization.",
-                        date: "January 10, 2024",
-                        readTime: "8 min read",
-                        category: "Backend",
-                        image: "/images/4882477.jpg"
-                    },
-                    {
-                        id: 3,
-                        title: "Mastering Tailwind CSS",
-                        excerpt: "Discover how to create beautiful, responsive designs quickly using Tailwind CSS. Tips, tricks, and real-world examples included.",
-                        date: "January 5, 2024",
-                        readTime: "6 min read",
-                        category: "CSS",
-                        image: "/images/7217.jpg"
-                    }
-                ]);
-            });
+            .then((res) => res.json())
+            .then((data) => setBlogs(Array.isArray(data) ? data.map(normalizePost) : []))
+            .catch(() => setBlogs([]));
     }, []);
 
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.2
-            }
-        }
+            transition: { staggerChildren: 0.12 },
+        },
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6
-            }
-        }
+        hidden: { opacity: 0, y: 24 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     };
 
     return (
-        <div className='w-full min-h-screen bg-white'>
-            <div className='max-w-7xl mx-auto px-8 py-12'>
-                {/* Header */}
+        <div className="min-h-screen w-full bg-white dark:bg-zinc-950">
+            <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:py-16">
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className='text-center mb-16'
+                    transition={{ duration: 0.5 }}
+                    className="mb-14 text-center"
                 >
-                    <h1 className='text-5xl font-black text-gray-800 mb-4 font-heading'>Blog</h1>
-                    <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
-                        Thoughts, tutorials, and insights on web development and software engineering
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">Writing</p>
+                    <h1 className="mt-2 font-display text-4xl font-normal text-zinc-900 dark:text-zinc-50 sm:text-5xl">
+                        Essays
+                    </h1>
+                    <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+                        Tutorials and engineering notes.
                     </p>
                 </motion.div>
 
-                {/* Blog Grid */}
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+                    className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
                 >
                     {blogs.map((blog) => (
                         <motion.article
                             key={blog.id}
                             variants={itemVariants}
-                            whileHover={{ y: -10 }}
-                            className='bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl transition-shadow duration-300'
+                            whileHover={{ y: -8 }}
+                            className="group flex flex-col overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-soft transition-shadow hover:shadow-card dark:border-zinc-700/80 dark:bg-zinc-900/50 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                         >
-                            {/* Blog Image */}
-                            <div className='relative h-48 overflow-hidden bg-gray-200'>
+                            <div className="relative h-48 overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                                 <img
                                     src={blog.image}
-                                    alt={blog.title}
-                                    className='w-full h-full object-cover hover:scale-110 transition-transform duration-300'
+                                    alt={`Cover: ${blog.title}`}
+                                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105 motion-reduce:transition-none"
                                 />
-                                <div className='absolute top-4 right-4'>
-                                    <span className='bg-[#5BC3D5] text-white text-xs font-bold px-3 py-1 rounded-full'>
+                                <div className="absolute right-4 top-4">
+                                    <span className="rounded-full bg-brand px-3 py-1 text-xs font-bold text-white shadow-soft">
                                         {blog.category}
                                     </span>
                                 </div>
                             </div>
-
-                            {/* Blog Content */}
-                            <div className='p-6'>
-                                <div className='flex items-center gap-4 text-xs text-gray-500 mb-3'>
-                                    <div className='flex items-center gap-1'>
-                                        <FaCalendarAlt />
-                                        <span>{blog.date}</span>
+                            <div className="flex flex-1 flex-col p-6">
+                                {(blog.date || blog.readTime) && (
+                                    <div className="mb-3 flex flex-wrap items-center gap-4 text-xs text-zinc-500 dark:text-zinc-400">
+                                        {blog.date && (
+                                            <span className="flex items-center gap-1">
+                                                <FaCalendarAlt aria-hidden />
+                                                {blog.date}
+                                            </span>
+                                        )}
+                                        <span className="flex items-center gap-1">
+                                            <FaClock aria-hidden />
+                                            {blog.readTime}
+                                        </span>
                                     </div>
-                                    <div className='flex items-center gap-1'>
-                                        <FaClock />
-                                        <span>{blog.readTime}</span>
-                                    </div>
-                                </div>
-
-                                <h2 className='text-xl font-bold text-gray-800 mb-3 font-heading hover:text-[#5BC3D5] transition-colors'>
+                                )}
+                                <h2 className="font-heading text-xl font-bold text-zinc-900 transition-colors group-hover:text-brand dark:text-zinc-100">
                                     {blog.title}
                                 </h2>
-
-                                <p className='text-gray-600 text-sm mb-4 line-clamp-3'>
+                                <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                                     {blog.excerpt}
                                 </p>
-
-                                <button className='flex items-center gap-2 text-[#5BC3D5] font-semibold hover:gap-3 transition-all'>
-                                    Read More <FaArrowRight />
+                                <button
+                                    type="button"
+                                    className="mt-4 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-brand transition hover:gap-3"
+                                >
+                                    Read more <FaArrowRight aria-hidden />
                                 </button>
                             </div>
                         </motion.article>
                     ))}
                 </motion.div>
 
-                {/* Empty State */}
                 {blogs.length === 0 && (
-                    <div className='text-center py-20'>
-                        <p className='text-gray-500 text-lg'>No blog posts available at the moment.</p>
-                    </div>
+                    <p className="py-20 text-center text-lg text-zinc-500 dark:text-zinc-400">No posts yet.</p>
                 )}
 
-                {/* Call to Action */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className='mt-16 text-center bg-gradient-to-r from-[#5BC3D5] to-[#4a9fb0] rounded-2xl p-12'
+                    transition={{ delay: 0.4 }}
+                    className="mt-16 rounded-2xl bg-gradient-to-r from-brand to-brand-mid p-10 text-center shadow-card sm:p-12"
                 >
-                    <h2 className='text-3xl font-bold text-white mb-4 font-heading'>Want to stay updated?</h2>
-                    <p className='text-white/90 mb-6 max-w-2xl mx-auto'>
-                        Subscribe to my newsletter to get the latest articles and tutorials delivered to your inbox.
+                    <h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">Stay updated</h2>
+                    <p className="mx-auto mt-3 max-w-xl text-white/90">
+                        Newsletter — wire this to your provider when ready.
                     </p>
-                    <div className='flex flex-col sm:flex-row gap-4 max-w-md mx-auto'>
+                    <div className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
                         <input
-                            type='email'
-                            placeholder='Enter your email'
-                            className='flex-1 px-4 py-3 rounded-lg border-none focus:outline-none focus:ring-2 focus:ring-white bg-white text-gray-900'
+                            type="email"
+                            placeholder="Email address"
+                            className="flex-1 rounded-xl border-0 px-4 py-3 text-zinc-900 focus:outline-none focus:ring-2 focus:ring-white/80"
                         />
-                        <button className='bg-gray-800 hover:bg-gray-900 text-white font-bold px-8 py-3 rounded-lg transition-colors'>
+                        <button
+                            type="button"
+                            className="cursor-pointer rounded-xl bg-zinc-900 px-8 py-3 font-bold text-white transition hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white dark:bg-zinc-950 dark:ring-1 dark:ring-white/20"
+                        >
                             Subscribe
                         </button>
                     </div>

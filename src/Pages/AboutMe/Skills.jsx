@@ -1,47 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import Skill from './Skill';
-import { FaArrowRight } from "react-icons/fa6";
-import { IoDocumentTextOutline } from "react-icons/io5";
-import { NavLink } from 'react-router-dom';
-
-
-
 
 const Skills = () => {
-   
-    const [mySkills,setmySkills] = useState([]);
-    useEffect(()=>{
+    const [mySkills, setmySkills] = useState([]);
+
+    useEffect(() => {
         fetch('/skills.json')
-        .then(res=>res.json())
-        .then(data=>{
-           setmySkills(data);
-        })
-    },[]);
-
-    console.log(mySkills[0]);
-
+            .then((res) => res.json())
+            .then((data) => {
+                setmySkills(data);
+            });
+    }, []);
 
     return (
-        <div className='mt-8 ml-8 lg:ml-16'>
-            <div className='space-y-3'>
-                <div className=' border-l-4 pl-4 border-[#5BC3D5] text-3xl py-1 font-bold '>
-                    What I do
+        <section
+            className="border-b border-zinc-200/80 bg-white py-16 dark:border-zinc-800 dark:bg-zinc-900/40 sm:py-20 lg:py-24"
+            aria-labelledby="skills-heading"
+        >
+            <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+                <div className="max-w-3xl">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">Stack</p>
+                    <h2
+                        id="skills-heading"
+                        className="mt-3 border-l-4 border-brand pl-4 font-heading text-3xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-4xl"
+                    >
+                        Technical depth
+                    </h2>
+                    <p className="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+                        Tools and domains I work in daily. Pair this with case studies in{' '}
+                        <span className="text-zinc-900 dark:text-zinc-200">Work</span> for proof, not just keywords.
+                    </p>
                 </div>
-                <div className='w-5/6'>
-                  I have more than 10 years' experience building software for clients all over the world. Below is a
-                  quick overview of my main technical skill sets and technologies I use.
-                  Want to find out more about my experience? Check out my online resume and project portfolio.
+
+                <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+                    {mySkills.map((s) => (
+                        <Skill key={s.name} s={s} />
+                    ))}
                 </div>
             </div>
-
-
-            <div className='grid grid-cols-2  lg:grid-cols-4 gap-10 mt-14 pr-4 lg:pr-16 mb-8'>
-               {
-                  mySkills.map(s=><Skill key = {s.name} s={s}></Skill>)
-               }
-            </div>
-
-        </div>
+        </section>
     );
 };
 

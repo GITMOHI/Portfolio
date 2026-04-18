@@ -2,71 +2,119 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
 
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+const OWNER_EMAIL = 'umohi559@gmail.com';
+
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         subject: '',
-        message: ''
+        message: '',
     });
 
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState({ type: '', text: '' });
+    const [submitting, setSubmitting] = useState(false);
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (status.type) setStatus({ type: '', text: '' });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setStatus('Message sent successfully! I will get back to you soon.');
-        // Reset form
-        setFormData({
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
+        if (!WEB3FORMS_KEY?.trim()) {
+            setStatus({
+                type: 'error',
+                text: 'Form is not configured yet. Use the email below or add VITE_WEB3FORMS_ACCESS_KEY (see .env.example).',
+            });
+            return;
+        }
+
+        setSubmitting(true);
+        setStatus({ type: '', text: '' });
+
+        try {
+            const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_KEY.trim(),
+                    name: formData.name.trim(),
+                    email: formData.email.trim(),
+                    subject: formData.subject.trim(),
+                    message: formData.message.trim(),
+                    from_name: 'Portfolio contact form',
+                    replyto: formData.email.trim(),
+                }),
+            });
+
+            const data = await res.json().catch(() => ({}));
+
+            if (res.ok && data.success) {
+                setStatus({
+                    type: 'success',
+                    text: 'Message sent. I will get back to you soon.',
+                });
+                setFormData({ name: '', email: '', subject: '', message: '' });
+            } else {
+                setStatus({
+                    type: 'error',
+                    text: data.message || 'Something went wrong. Please try again or email directly.',
+                });
+            }
+        } catch {
+            setStatus({
+                type: 'error',
+                text: 'Network error. Check your connection or email me directly.',
+            });
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    const mailtoFallback = () => {
+        const q = new URLSearchParams({
+            subject: formData.subject || 'Portfolio inquiry',
+            body: `From: ${formData.name || '…'}\nEmail: ${formData.email || '…'}\n\n${formData.message || ''}`,
         });
-        // Clear status after 5 seconds
-        setTimeout(() => setStatus(''), 5000);
+        window.location.href = `mailto:${OWNER_EMAIL}?${q.toString()}`;
     };
 
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.2
-            }
-        }
+            transition: { staggerChildren: 0.12 },
+        },
     };
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.5
-            }
-        }
+        hidden: { opacity: 0, y: 16 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
     };
 
+    const inputClass =
+        'w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 transition placeholder:text-zinc-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30 disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-brand';
+
     return (
-        <div className='w-full min-h-screen bg-white'>
-            <div className='max-w-7xl mx-auto px-8 py-12'>
-                {/* Title Section */}
+        <div className="min-h-screen w-full bg-zinc-50 dark:bg-zinc-950">
+            <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:py-16">
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, y: -16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className='text-center mb-16'
+                    transition={{ duration: 0.5 }}
+                    className="mb-14 text-center"
                 >
-                    <h1 className='text-5xl font-black text-gray-800 mb-4 font-heading'>Get In Touch</h1>
-                    <p className='text-xl text-gray-600 max-w-2xl mx-auto'>
-                        Have a project in mind or just want to chat? Feel free to reach out!
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">Contact</p>
+                    <h1 className="mt-2 font-display text-4xl font-normal text-zinc-900 dark:text-zinc-50 sm:text-5xl">
+                        Let&apos;s work together
+                    </h1>
+                    <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+                        Share a brief — I typically reply within a day or two.
                     </p>
                 </motion.div>
 
@@ -74,163 +122,201 @@ const Contact = () => {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className='grid grid-cols-1 lg:grid-cols-2 gap-12'
+                    className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16"
                 >
-                    {/* Contact Information */}
-                    <motion.div variants={itemVariants} className='space-y-8'>
+                    <motion.div variants={itemVariants} className="space-y-8">
                         <div>
-                            <h2 className='text-3xl font-bold text-gray-800 mb-6 font-heading'>Contact Information</h2>
-                            <p className='text-gray-600 mb-8'>
-                                I'm currently available for freelance work and open to discussing new projects and opportunities.
+                            <h2 className="font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                                Direct lines
+                            </h2>
+                            <p className="mt-3 text-zinc-600 dark:text-zinc-400">
+                                Freelance and full-time conversations welcome.
                             </p>
                         </div>
 
-                        <div className='space-y-6'>
-                            <motion.div
-                                whileHover={{ x: 10 }}
-                                className='flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors'
-                            >
-                                <div className='bg-[#5BC3D5] p-3 rounded-full'>
-                                    <FaPhone className='text-white text-xl' />
-                                </div>
-                                <div>
-                                    <h3 className='font-bold text-gray-800 mb-1'>Phone</h3>
-                                    <p className='text-gray-600'>01625680207</p>
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ x: 10 }}
-                                className='flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors'
-                            >
-                                <div className='bg-[#5BC3D5] p-3 rounded-full'>
-                                    <FaEnvelope className='text-white text-xl' />
-                                </div>
-                                <div>
-                                    <h3 className='font-bold text-gray-800 mb-1'>Email</h3>
-                                    <p className='text-gray-600'>umohi559@gmail.com</p>
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ x: 10 }}
-                                className='flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors'
-                            >
-                                <div className='bg-[#5BC3D5] p-3 rounded-full'>
-                                    <FaMapMarkerAlt className='text-white text-xl' />
-                                </div>
-                                <div>
-                                    <h3 className='font-bold text-gray-800 mb-1'>Location</h3>
-                                    <p className='text-gray-600'>Chittagong, Bangladesh</p>
-                                </div>
-                            </motion.div>
+                        <div className="space-y-4">
+                            {[
+                                { icon: FaPhone, title: 'Phone', text: '01625680207', href: 'tel:+8801625680207' },
+                                {
+                                    icon: FaEnvelope,
+                                    title: 'Email',
+                                    text: OWNER_EMAIL,
+                                    href: `mailto:${OWNER_EMAIL}`,
+                                },
+                                { icon: FaMapMarkerAlt, title: 'Location', text: 'Chittagong, Bangladesh' },
+                            ].map(({ icon: Icon, title, text, href }) => (
+                                <motion.div
+                                    key={title}
+                                    whileHover={{ x: 6 }}
+                                    className="flex items-start gap-4 rounded-2xl border border-zinc-200/90 bg-white p-4 shadow-soft transition hover:border-brand/30 dark:border-zinc-700/80 dark:bg-zinc-900/50"
+                                >
+                                    <div className="rounded-xl bg-brand p-3 text-white shadow-soft">
+                                        <Icon className="text-xl" aria-hidden />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{title}</h3>
+                                        {href ? (
+                                            <a
+                                                href={href}
+                                                className="text-zinc-600 underline-offset-2 transition hover:text-brand hover:underline dark:text-zinc-400"
+                                            >
+                                                {text}
+                                            </a>
+                                        ) : (
+                                            <p className="text-zinc-600 dark:text-zinc-400">{text}</p>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
 
-                        {/* Social Links */}
-                        <div className='pt-8'>
-                            <h3 className='font-bold text-gray-800 mb-4'>Connect with me</h3>
-                            <div className='flex gap-4'>
+                        <div>
+                            <h3 className="mb-4 font-bold text-zinc-900 dark:text-zinc-100">Social</h3>
+                            <div className="flex gap-3">
                                 <a
-                                    href='#'
-                                    className='bg-gray-100 p-3 rounded-full hover:bg-[#5BC3D5] hover:text-white transition-colors'
+                                    href="#"
+                                    className="rounded-full border border-zinc-200 bg-white p-3 text-zinc-700 transition hover:border-brand hover:bg-brand hover:text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-brand focus-ring"
+                                    aria-label="LinkedIn"
                                 >
-                                    <FaLinkedin className='text-2xl' />
+                                    <FaLinkedin className="text-2xl" />
                                 </a>
                                 <a
-                                    href='#'
-                                    className='bg-gray-100 p-3 rounded-full hover:bg-[#5BC3D5] hover:text-white transition-colors'
+                                    href="#"
+                                    className="rounded-full border border-zinc-200 bg-white p-3 text-zinc-700 transition hover:border-brand hover:bg-brand hover:text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-brand focus-ring"
+                                    aria-label="GitHub"
                                 >
-                                    <FaGithub className='text-2xl' />
+                                    <FaGithub className="text-2xl" />
                                 </a>
                             </div>
                         </div>
                     </motion.div>
 
-                    {/* Contact Form */}
                     <motion.div variants={itemVariants}>
-                        <div className='bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl shadow-xl'>
-                            <h2 className='text-3xl font-bold text-gray-800 mb-6 font-heading'>Send a Message</h2>
+                        <div className="rounded-2xl border border-zinc-200/90 bg-white p-8 shadow-card dark:border-zinc-700/80 dark:bg-zinc-900/50">
+                            <h2 className="font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                                Message
+                            </h2>
 
-                            <form onSubmit={handleSubmit} className='space-y-6'>
+                            {!WEB3FORMS_KEY?.trim() && (
+                                <p className="mt-4 rounded-xl border border-amber-200/80 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-200">
+                                    <strong className="font-semibold">Setup:</strong> Add{' '}
+                                    <code className="rounded bg-amber-100/80 px-1 py-0.5 text-xs dark:bg-amber-900/50">
+                                        VITE_WEB3FORMS_ACCESS_KEY
+                                    </code>{' '}
+                                    to <code className="text-xs">.env</code> (see{' '}
+                                    <code className="text-xs">.env.example</code>). Free key at{' '}
+                                    <a
+                                        href="https://web3forms.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="font-semibold underline"
+                                    >
+                                        web3forms.com
+                                    </a>
+                                    . Until then, use <strong>Open in email app</strong> below.
+                                </p>
+                            )}
+
+                            <form
+                                onSubmit={handleSubmit}
+                                className="mt-8 space-y-5"
+                                aria-busy={submitting}
+                                noValidate={false}
+                            >
                                 <div>
-                                    <label className='block text-gray-700 font-semibold mb-2' htmlFor='name'>
-                                        Your Name
+                                    <label className="mb-2 block font-semibold text-zinc-700 dark:text-zinc-300" htmlFor="name">
+                                        Name
                                     </label>
                                     <input
-                                        type='text'
-                                        id='name'
-                                        name='name'
+                                        type="text"
+                                        id="name"
+                                        name="name"
                                         value={formData.name}
                                         onChange={handleChange}
                                         required
-                                        className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5BC3D5] bg-white text-gray-900'
-                                        placeholder='John Doe'
+                                        disabled={submitting}
+                                        className={inputClass}
+                                        placeholder="Your name"
                                     />
                                 </div>
-
                                 <div>
-                                    <label className='block text-gray-700 font-semibold mb-2' htmlFor='email'>
-                                        Your Email
+                                    <label className="mb-2 block font-semibold text-zinc-700 dark:text-zinc-300" htmlFor="email">
+                                        Email
                                     </label>
                                     <input
-                                        type='email'
-                                        id='email'
-                                        name='email'
+                                        type="email"
+                                        id="email"
+                                        name="email"
                                         value={formData.email}
                                         onChange={handleChange}
                                         required
-                                        className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5BC3D5] bg-white text-gray-900'
-                                        placeholder='john@example.com'
+                                        disabled={submitting}
+                                        className={inputClass}
+                                        placeholder="you@example.com"
                                     />
                                 </div>
-
                                 <div>
-                                    <label className='block text-gray-700 font-semibold mb-2' htmlFor='subject'>
+                                    <label className="mb-2 block font-semibold text-zinc-700 dark:text-zinc-300" htmlFor="subject">
                                         Subject
                                     </label>
                                     <input
-                                        type='text'
-                                        id='subject'
-                                        name='subject'
+                                        type="text"
+                                        id="subject"
+                                        name="subject"
                                         value={formData.subject}
                                         onChange={handleChange}
                                         required
-                                        className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5BC3D5] bg-white text-gray-900'
-                                        placeholder='Project Inquiry'
+                                        disabled={submitting}
+                                        className={inputClass}
+                                        placeholder="Project / role"
                                     />
                                 </div>
-
                                 <div>
-                                    <label className='block text-gray-700 font-semibold mb-2' htmlFor='message'>
+                                    <label className="mb-2 block font-semibold text-zinc-700 dark:text-zinc-300" htmlFor="message">
                                         Message
                                     </label>
                                     <textarea
-                                        id='message'
-                                        name='message'
+                                        id="message"
+                                        name="message"
                                         value={formData.message}
                                         onChange={handleChange}
                                         required
-                                        rows='5'
-                                        className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5BC3D5] resize-none bg-white text-gray-900'
-                                        placeholder='Tell me about your project...'
-                                    ></textarea>
+                                        disabled={submitting}
+                                        rows={5}
+                                        className={`${inputClass} resize-none`}
+                                        placeholder="Context, timeline, links…"
+                                    />
                                 </div>
 
-                                {status && (
+                                {status.text && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: -10 }}
+                                        initial={{ opacity: 0, y: -8 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg'
+                                        role="alert"
+                                        className={`rounded-xl border px-4 py-3 text-sm ${
+                                            status.type === 'success'
+                                                ? 'border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-200'
+                                                : 'border-red-200 bg-red-50 text-red-800 dark:border-red-900 dark:bg-red-950/40 dark:text-red-200'
+                                        }`}
                                     >
-                                        {status}
+                                        {status.text}
                                     </motion.div>
                                 )}
 
                                 <button
-                                    type='submit'
-                                    className='w-full bg-[#5BC3D5] hover:bg-[#4a9fb0] text-white font-bold py-4 rounded-lg transition-colors shadow-lg hover:shadow-xl'
+                                    type="submit"
+                                    disabled={submitting}
+                                    className="w-full cursor-pointer rounded-xl bg-brand py-4 text-base font-bold text-white shadow-soft transition hover:bg-brand-mid disabled:cursor-not-allowed disabled:opacity-60 focus-ring"
                                 >
-                                    Send Message
+                                    {submitting ? 'Sending…' : 'Send message'}
+                                </button>
+
+                                <button
+                                    type="button"
+                                    onClick={mailtoFallback}
+                                    className="w-full cursor-pointer rounded-xl border border-zinc-300 py-3 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800 focus-ring"
+                                >
+                                    Open in email app instead
                                 </button>
                             </form>
                         </div>

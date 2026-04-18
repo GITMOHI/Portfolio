@@ -1,39 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import Blog from './Blog';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa6';
 
 const Blogs = () => {
+    const [blogs, setblogs] = useState([]);
 
-    const [blogs,setblogs]=useState([]);
-    useEffect(()=>{
+    useEffect(() => {
         fetch('/blog.json')
-        .then(res=>res.json())
-        .then(data=>setblogs(data))
-    },[]);
-
+            .then((res) => res.json())
+            .then((data) => setblogs(data));
+    }, []);
 
     return (
+        <section className="bg-zinc-50 py-16 dark:bg-zinc-950 sm:py-20 lg:py-24" aria-labelledby="blogs-heading">
+            <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+                <div className="max-w-3xl">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">Writing</p>
+                    <h2
+                        id="blogs-heading"
+                        className="mt-3 border-l-4 border-brand pl-4 font-heading text-3xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-4xl"
+                    >
+                        Essays & notes
+                    </h2>
+                    <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400 sm:text-lg">
+                        Long-form thoughts on building software.
+                    </p>
+                </div>
 
-        <div className='mt-16 ml-8 lg:ml-16 mr-8 lg:mr-16'>
-            <div className='space-y-3 mb-8 lg:mb-14'>
-                <div className=' border-l-4 pl-4 border-[#5BC3D5] text-3xl py-1 font-bold '>
-                    Latest Blogs
+                <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {blogs.map((b) => (
+                        <Blog key={b.blog_name} b={b} />
+                    ))}
+                </div>
+
+                <div className="mt-14 flex justify-center">
+                    <Link
+                        to="/blog"
+                        className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-brand px-8 py-3.5 text-base font-semibold text-white shadow-soft transition hover:bg-brand-hover focus-ring"
+                    >
+                        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20" aria-hidden>
+                            <FaArrowRight className="text-lg text-white" />
+                        </span>
+                        All writing
+                    </Link>
                 </div>
             </div>
-
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
-            {
-                blogs.map(b=><Blog key={b.blog_name} b = {b}></Blog>)
-            }
-            </div>
-
-            <div className='flex flex-row justify-center mt-16 mb-16'>
-               <NavLink to="/portfolio"><button className="btn  bg-[#5BC3D5] hover:bg-[#398d9c] border-none"><div className='mr-1 md:mr-2 rounded-full bg-white p-1'><FaArrowRight className=' bg-white font-bold  text-sm md:text-xl text-[#5BC3D5]'></FaArrowRight></div> <p className='font-bold text-white text-sm md:text-base flex flex-row items-center'><p className='hidden lg:block mr-2'>View </p> Blogs</p></button></NavLink> 
-            </div>
-
-        </div>
-
+        </section>
     );
 };
 
