@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { GITHUB_URL, LINKEDIN_URL } from '../../constants/social';
 
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 const OWNER_EMAIL = 'umohi559@gmail.com';
 
 const Contact = () => {
@@ -23,47 +23,44 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!WEB3FORMS_KEY?.trim()) {
-            setStatus({
-                type: 'error',
-                text: 'Form is not configured yet. Use the email below or add VITE_WEB3FORMS_ACCESS_KEY (see .env.example).',
-            });
-            return;
-        }
 
         setSubmitting(true);
         setStatus({ type: '', text: '' });
 
+        const name = formData.name.trim();
+        const email = formData.email.trim();
+        const subject = formData.subject.trim();
+        const message = formData.message.trim();
+
         try {
-            const res = await fetch('https://api.web3forms.com/submit', {
+            const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 },
-                body: JSON.stringify({
-                    access_key: WEB3FORMS_KEY.trim(),
-                    name: formData.name.trim(),
-                    email: formData.email.trim(),
-                    subject: formData.subject.trim(),
-                    message: formData.message.trim(),
-                    from_name: 'Portfolio contact form',
-                    replyto: formData.email.trim(),
-                }),
+                body: JSON.stringify({ name, email, subject, message }),
             });
 
             const data = await res.json().catch(() => ({}));
 
-            if (res.ok && data.success) {
+            if (res.ok && data.ok) {
                 setStatus({
                     type: 'success',
                     text: 'Message sent. I will get back to you soon.',
                 });
                 setFormData({ name: '', email: '', subject: '', message: '' });
+            } else if (res.status === 503) {
+                setStatus({
+                    type: 'error',
+                    text: "Couldn't send from the site. Use Open in email app below.",
+                });
             } else {
                 setStatus({
                     type: 'error',
-                    text: data.message || 'Something went wrong. Please try again or email directly.',
+                    text:
+                        data.error ||
+                        'Something went wrong. Please try again or email directly.',
                 });
             }
         } catch {
@@ -174,14 +171,18 @@ const Contact = () => {
                             <h3 className="mb-4 font-bold text-zinc-900 dark:text-zinc-100">Social</h3>
                             <div className="flex gap-3">
                                 <a
-                                    href="#"
+                                    href={LINKEDIN_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="rounded-full border border-zinc-200 bg-white p-3 text-zinc-700 transition hover:border-brand hover:bg-brand hover:text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-brand focus-ring"
                                     aria-label="LinkedIn"
                                 >
                                     <FaLinkedin className="text-2xl" />
                                 </a>
                                 <a
-                                    href="#"
+                                    href={GITHUB_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="rounded-full border border-zinc-200 bg-white p-3 text-zinc-700 transition hover:border-brand hover:bg-brand hover:text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-brand focus-ring"
                                     aria-label="GitHub"
                                 >
@@ -196,26 +197,6 @@ const Contact = () => {
                             <h2 className="font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-100">
                                 Message
                             </h2>
-
-                            {!WEB3FORMS_KEY?.trim() && (
-                                <p className="mt-4 rounded-xl border border-amber-200/80 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-200">
-                                    <strong className="font-semibold">Setup:</strong> Add{' '}
-                                    <code className="rounded bg-amber-100/80 px-1 py-0.5 text-xs dark:bg-amber-900/50">
-                                        VITE_WEB3FORMS_ACCESS_KEY
-                                    </code>{' '}
-                                    to <code className="text-xs">.env</code> (see{' '}
-                                    <code className="text-xs">.env.example</code>). Free key at{' '}
-                                    <a
-                                        href="https://web3forms.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="font-semibold underline"
-                                    >
-                                        web3forms.com
-                                    </a>
-                                    . Until then, use <strong>Open in email app</strong> below.
-                                </p>
-                            )}
 
                             <form
                                 onSubmit={handleSubmit}

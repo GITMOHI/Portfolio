@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { IoLogoGithub } from 'react-icons/io5';
 import { TfiLinkedin } from 'react-icons/tfi';
+import { GITHUB_URL, LINKEDIN_URL } from '../constants/social';
 
 const SiteFooter = () => {
     return (
@@ -17,7 +18,7 @@ const SiteFooter = () => {
                 </div>
                 <div className="flex items-center gap-6">
                     <a
-                        href="https://linkedin.com"
+                        href={LINKEDIN_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-zinc-500 transition hover:text-brand dark:text-zinc-400"
@@ -26,7 +27,7 @@ const SiteFooter = () => {
                         <TfiLinkedin className="h-5 w-5" />
                     </a>
                     <a
-                        href="https://github.com"
+                        href={GITHUB_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-zinc-500 transition hover:text-brand dark:text-zinc-400"

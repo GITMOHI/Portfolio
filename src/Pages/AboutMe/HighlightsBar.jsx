@@ -1,8 +1,7 @@
 import React from 'react';
 
 const items = [
-    { label: 'Role', value: 'Full-stack engineer' },
-    { label: 'Focus', value: 'React · Node · Golang' },
+    { label: 'Focus', value: 'Tailwind · React · TypeScript · Node · Golang' },
     {
         label: 'Education',
         value: (
@@ -36,7 +35,7 @@ const HighlightsBar = () => {
             className="border-b border-zinc-200/90 bg-white dark:border-zinc-800 dark:bg-zinc-900/50"
             aria-label="Profile highlights"
         >
-            <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-12 sm:grid-cols-3 lg:grid-cols-5 sm:px-8 lg:px-12">
+            <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4 sm:px-8 lg:px-12">
                 {items.map(({ label, value }) => (
                     <div key={label} className="text-center sm:text-left">
                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">

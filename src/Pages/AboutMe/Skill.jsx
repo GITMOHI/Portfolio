@@ -3,15 +3,18 @@ import { getSkillImageFallback } from './skillImageFallbacks';
 
 /** Simple Icons slugs — second CDN tier if devicon fails */
 const SIMPLE_ICON_SLUG = {
-    'HTML & CSS': 'html5',
-    JavaScript: 'javascript',
+    'Tailwind CSS': 'tailwindcss',
+    Shadcn: 'shadcnui',
+    TypeScript: 'typescript',
     React: 'react',
-    Python: 'python',
-    Django: 'django',
+    Golang: 'go',
     'Node.js': 'nodedotjs',
     'Express.js': 'express',
+    'Socket.IO': 'socketdotio',
     MongoDB: 'mongodb',
-    MySQL: 'mysql',
+    PostgreSQL: 'postgresql',
+    Firestore: 'firebase',
+    GCP: 'googlecloud',
     'Version Control (Git)': 'git',
     'RESTful APIs': 'openapiinitiative',
 };

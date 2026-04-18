@@ -1,9 +1,10 @@
-import { FaFilePdf, FaGithub, FaLocationDot, FaPhone } from 'react-icons/fa6';
+import { FaFilePdf, FaGithub, FaLinkedin, FaLocationDot, FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 import { SiLeetcode } from 'react-icons/si';
+import { GITHUB_URL, LINKEDIN_URL } from '../../constants/social';
 
 const SUMMARY =
-    'Software engineer building full-stack web products at Lab3. I care about clear UI architecture, maintainable APIs, and shipping features with solid test coverage and documentation. Comfortable across React, Node.js, and Django-backed systems.';
+    'Software engineer building full-stack web products at Lab3. I care about clear UI architecture, maintainable APIs, and shipping features with solid test coverage and documentation. Comfortable across React, Node.js, Go, and cloud-backed systems on GCP.';
 
 const CONTACT = [
     {
@@ -21,8 +22,14 @@ const CONTACT = [
     {
         icon: FaGithub,
         label: 'GitHub',
-        value: 'github.com',
-        href: 'https://github.com',
+        value: 'GITMOHI',
+        href: GITHUB_URL,
+    },
+    {
+        icon: FaLinkedin,
+        label: 'LinkedIn',
+        value: 'mohi-uddin',
+        href: LINKEDIN_URL,
     },
     {
         icon: SiLeetcode,
@@ -65,10 +72,10 @@ const EXPERIENCE = [
 ];
 
 const SKILL_GROUPS = [
-    { label: 'Languages', skills: ['C++', 'JavaScript', 'Python'] },
+    { label: 'Languages', skills: ['C++', 'TypeScript', 'Go'] },
     { label: 'Frontend', skills: ['React', 'Redux'] },
-    { label: 'Backend', skills: ['Node.js', 'Express.js', 'Django'] },
-    { label: 'Data', skills: ['MySQL', 'MongoDB'] },
+    { label: 'Backend', skills: ['Node.js', 'Express.js', 'Socket.IO'] },
+    { label: 'Data & cloud', skills: ['PostgreSQL', 'MongoDB', 'Firestore', 'GCP'] },
 ];
 
 function SectionLabel({ children }) {

@@ -2,6 +2,7 @@ import React from 'react';
 import { TfiLinkedin } from 'react-icons/tfi';
 import { IoLogoTwitter } from 'react-icons/io';
 import { IoLogoGithub } from 'react-icons/io';
+import { GITHUB_URL, LINKEDIN_URL } from '../../constants/social';
 
 const Profile = ({ color }) => {
     const iconWrap =
@@ -28,7 +29,7 @@ const Profile = ({ color }) => {
 
                 <div className="flex flex-row flex-wrap justify-center gap-3 pt-2">
                     <a
-                        href="https://linkedin.com"
+                        href={LINKEDIN_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={iconWrap}
@@ -46,7 +47,7 @@ const Profile = ({ color }) => {
                         <IoLogoTwitter style={{ color }} className="text-xl" />
                     </a>
                     <a
-                        href="https://github.com"
+                        href={GITHUB_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={iconWrap}

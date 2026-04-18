@@ -1,28 +1,28 @@
 [
   {
-    "name": "HTML & CSS",
-    "description": "Markup language for creating web pages and style sheet language for describing the presentation of a document written in HTML.",
-    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
+    "name": "Tailwind CSS",
+    "description": "Utility-first CSS framework for rapidly building custom designs without leaving your markup.",
+    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
   },
   {
-    "name": "JavaScript",
-    "description": "High-level programming language for creating dynamic and interactive content on web pages.",
-    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+    "name": "Shadcn",
+    "description": "Re-usable components built with Radix UI and Tailwind CSS — copy-paste patterns you own in your codebase.",
+    "image": "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/shadcnui.svg"
+  },
+  {
+    "name": "TypeScript",
+    "description": "Typed superset of JavaScript that scales with larger codebases through static checking and great tooling.",
+    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg"
   },
   {
     "name": "React",
-    "description": "JavaScript library for building user interfaces.",
+    "description": "Library for building component-based user interfaces on the web.",
     "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
   },
   {
-    "name": "Python",
-    "description": "High-level programming language known for its simplicity and readability, commonly used for web development, data science, and more.",
-    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
-  },
-  {
-    "name": "Django",
-    "description": "High-level Python web framework that encourages rapid development and clean, pragmatic design.",
-    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg"
+    "name": "Golang",
+    "description": "Statically typed, compiled language designed at Google for scalable systems and concurrent services.",
+    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg"
   },
   {
     "name": "Node.js",
@@ -35,14 +35,29 @@
     "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg"
   },
   {
+    "name": "Socket.IO",
+    "description": "Library for real-time, bidirectional event-based communication between web clients and servers.",
+    "image": "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/socketdotio.svg"
+  },
+  {
     "name": "MongoDB",
     "description": "NoSQL database program.",
     "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg"
   },
   {
-    "name": "MySQL",
-    "description": "Open-source relational database management system.",
-    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
+    "name": "PostgreSQL",
+    "description": "Advanced open-source relational database with strong SQL compliance and extensibility.",
+    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+  },
+  {
+    "name": "Firestore",
+    "description": "Serverless NoSQL document database from Google for mobile and web apps with real-time sync.",
+    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg"
+  },
+  {
+    "name": "GCP",
+    "description": "Google Cloud Platform — compute, storage, networking, and managed services for production workloads.",
+    "image": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg"
   },
   {
     "name": "Version Control (Git)",
